@@ -13,8 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private float _jumpForce = 8f; // Lực nhảy
     [SerializeField]
     private float _dashSpeed = 10f; // Tốc độ lướt
-    [SerializeField]
-    private bool RotateTowardMouse; // Xoay nhân vật theo chuột hay không
+    
     [SerializeField]
     private float MovementSpeed = 5f; // Tốc độ di chuyển
     [SerializeField]
@@ -67,14 +66,9 @@ public class PlayerMovement : MonoBehaviour
         var targetVector = new Vector3(_inputManager.InputVector.x, 0, _inputManager.InputVector.y);
         MoveTowardTarget(targetVector);
 
-        if (RotateTowardMouse)
-        {
-            RotateFromMouseVector();
-        }
-        else
-        {
-            RotateTowardMovementVector(targetVector);
-        }
+        
+        RotateTowardMovementVector(targetVector);
+        
     }
 
     private void FixedUpdate()
@@ -106,16 +100,16 @@ public class PlayerMovement : MonoBehaviour
         );
     }
 
-    private void RotateFromMouseVector()
-    {
-        Ray ray = _cameraTransform.GetComponent<Camera>().ScreenPointToRay(_inputManager.MousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
-        {
-            var target = hitInfo.point;
-            target.y = transform.position.y;
-            transform.LookAt(target);
-        }
-    }
+    // private void RotateFromMouseVector()
+    // {
+    //     Ray ray = _cameraTransform.GetComponent<Camera>().ScreenPointToRay(_inputManager.MousePosition);
+    //     if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
+    //     {
+    //         var target = hitInfo.point;
+    //         target.y = transform.position.y;
+    //         transform.LookAt(target);
+    //     }
+    // }
 
     private void RotateTowardMovementVector(Vector3 movementDirection)
     {
@@ -137,10 +131,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!_canDash || _rb == null || _inputManager == null) return;
 
-        if (_inputManager.IsDashPressed())
+        if (_inputManager.IsDashPressed()&& _isGrounded)
         {
             Debug.Log("Dash Activated");
-            _rb.linearVelocity = transform.forward * _dashSpeed;
+            _rb.linearVelocity = transform.TransformDirection(Vector3.forward) * _dashSpeed;
 
             _canDash = false;
 
@@ -148,8 +142,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 StopCoroutine(_dashCooldownCoroutine);
             }
-            _dashCooldownCoroutine = StartCoroutine(DashCooldown(1f));
+            _dashCooldownCoroutine = StartCoroutine(DashCooldown(5f));
         }
+        
     }
 
     private IEnumerator DashCooldown(float cooldownTime)

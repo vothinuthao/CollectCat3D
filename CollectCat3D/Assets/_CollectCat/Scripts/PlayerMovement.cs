@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool _canDash = true; // Biến kiểm tra cooldown cho Dash
     private Coroutine _dashCooldownCoroutine;
+    [SerializeField]
     private Animator _animator;
     private void Awake()
     {
@@ -54,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
 
         _rb.freezeRotation = true; // Ngăn nhân vật tự xoay
         _rb.linearDamping = 0f; // Loại bỏ lực cản
-        _animator = GetComponent<Animator>();
     }
 
   
@@ -69,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
         var targetVector = new Vector3(_inputManager.InputVector.x, 0, _inputManager.InputVector.y);
         MoveTowardTarget(targetVector);
         float speed = targetVector.magnitude;
+        UpdateAnimator(speed);
         RotateTowardMovementVector(targetVector);
         
     }
@@ -94,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateAnimator(float speed)
     {
-        if (_animator != null)
+        if (_animator != null )
         {
             bool isMoving = speed > 0.1f; // Nếu tốc độ > 0.1, coi như nhân vật đang di chuyển
             _animator.SetBool("isMoving", isMoving);

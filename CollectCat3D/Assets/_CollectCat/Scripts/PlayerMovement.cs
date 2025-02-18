@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool _canDash = true; // Biến kiểm tra cooldown cho Dash
     private Coroutine _dashCooldownCoroutine;
-
+    private Animator _animator;
     private void Awake()
     {
         _inputManager = GetComponent<InputManager>();
@@ -54,7 +54,10 @@ public class PlayerMovement : MonoBehaviour
 
         _rb.freezeRotation = true; // Ngăn nhân vật tự xoay
         _rb.linearDamping = 0f; // Loại bỏ lực cản
+        _animator = GetComponent<Animator>();
     }
+
+  
 
     private void Update()
     {
@@ -65,8 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
         var targetVector = new Vector3(_inputManager.InputVector.x, 0, _inputManager.InputVector.y);
         MoveTowardTarget(targetVector);
-
-        
+        float speed = targetVector.magnitude;
         RotateTowardMovementVector(targetVector);
         
     }
@@ -90,14 +92,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void UpdateAnimator(float speed)
+    {
+        if (_animator != null)
+        {
+            bool isMoving = speed > 0.1f; // Nếu tốc độ > 0.1, coi như nhân vật đang di chuyển
+            _animator.SetBool("isMoving", isMoving);
+        }
+    }
     private void MoveTowardTarget(Vector3 targetVector)
     {
         targetVector = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0) * targetVector;
-        _rb.linearVelocity = new Vector3(
-            targetVector.x * MovementSpeed,
-            _rb.linearVelocity.y,
-            targetVector.z * MovementSpeed
-        );
+        _rb.linearVelocity = new Vector3(targetVector.x * MovementSpeed, _rb.linearVelocity.y, targetVector.z * MovementSpeed);
+      
     }
 
     // private void RotateFromMouseVector()

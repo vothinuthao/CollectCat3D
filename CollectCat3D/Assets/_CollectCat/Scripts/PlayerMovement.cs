@@ -95,11 +95,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateAnimator(float speed)
     {
-        if (_animator != null )
+        if (_animator != null && _isGrounded )
         {
             bool isMoving = speed > 0.1f; // Nếu tốc độ > 0.1, coi như nhân vật đang di chuyển
             _animator.SetBool("isMoving", isMoving);
         }
+        else
+        {
+            _animator.SetBool("isMoving", false);
+        }
+        
     }
     private void MoveTowardTarget(Vector3 targetVector)
     {

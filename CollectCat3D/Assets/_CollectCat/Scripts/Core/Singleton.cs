@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
@@ -11,6 +12,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     // Lock object để đảm bảo thread-safe
     private static readonly object _lock = new object();
     
+    [Obsolete("Obsolete")]
     public static T Instance
     {
         get

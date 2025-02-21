@@ -1,16 +1,50 @@
+using System;
+using TMPro;
 using UnityEngine;
 
 public class PlayerView : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField]
+    private TextMeshProUGUI _levelText;
+    [SerializeField]
+    private TextMeshProUGUI _playerNameText;
+    [SerializeField]
+    private PlayerStats _playerStats;
+
+    private void Start()
     {
+        if (_playerStats == null)
+        {
+            Debug.Log("PlayerStats is missing!");
+        }
+
+        _playerStats.LevelChanged += UpdateLevelText;
+        
+        UpdatePlayerNameText();
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void UpdateLevelText()
     {
-        
+        if (_levelText != null)
+        {
+            _levelText.text = "Level:" + _playerStats.GetPlayerCurrentLevel();
+        }
+    }
+
+    private void UpdatePlayerNameText()
+    {
+        if (_playerNameText != null)
+        {
+            _playerNameText.text = _playerStats.GetPlayerName();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_playerStats != null)
+        {
+            _playerStats.LevelChanged -= UpdateLevelText;
+        }
     }
 }

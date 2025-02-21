@@ -14,8 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float _dashSpeed = 10f; // Tốc độ lướt
     
-    [SerializeField]
-    private float MovementSpeed = 5f; // Tốc độ di chuyển
+    //[SerializeField]
+    //private float MovementSpeed = 5f; // Tốc độ di chuyển
     [SerializeField]
     private float RotationSpeed = 360f; // Tốc độ xoay
     [SerializeField]
@@ -30,9 +30,9 @@ public class PlayerMovement : MonoBehaviour
     private Coroutine _dashCooldownCoroutine;
     [SerializeField]
     private Animator _animator;
+    
     private void Awake()
     {
-        _playerStats = GetComponent<PlayerStats>();
         _inputManager = GetComponent<InputManager>();
         if (_inputManager == null)
         {
@@ -54,8 +54,16 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        _playerStats = new PlayerStats();
+        if (_playerStats == null)
+        {
+            Debug.LogError("PlayerStats is missing!");
+        }
+
         _rb.freezeRotation = true; // Ngăn nhân vật tự xoay
         _rb.linearDamping = 0f; // Loại bỏ lực cản
+       
+        _playerStats.ResetSpeed();
     }
 
   
@@ -110,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
     private void MoveTowardTarget(Vector3 targetVector)
     {
         targetVector = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0) * targetVector;
-        _rb.linearVelocity = new Vector3(targetVector.x * MovementSpeed, _rb.linearVelocity.y, targetVector.z * MovementSpeed);
+        _rb.linearVelocity = new Vector3(targetVector.x * _playerStats.CurrentSpeed, _rb.linearVelocity.y, targetVector.z * _playerStats.CurrentSpeed);
       
     }
 

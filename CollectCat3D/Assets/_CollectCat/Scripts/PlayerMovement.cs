@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rb;
     private bool _isGrounded;
     private InputManager _inputManager;
-
+    private PlayerStats _playerStats;
     [SerializeField]
     private float _jumpForce = 8f; // Lực nhảy
     [SerializeField]
@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     private void Awake()
     {
+        _playerStats = GetComponent<PlayerStats>();
         _inputManager = GetComponent<InputManager>();
         if (_inputManager == null)
         {

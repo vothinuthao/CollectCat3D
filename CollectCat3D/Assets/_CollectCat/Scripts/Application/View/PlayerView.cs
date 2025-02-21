@@ -21,7 +21,7 @@ public class PlayerView : MonoBehaviour
         _playerStats.LevelChanged += UpdateLevelText;
         
         UpdatePlayerNameText();
-        
+        _playerStats = gameObject.GetComponent<PlayerStats>();;
     }
 
     private void UpdateLevelText()

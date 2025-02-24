@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerStats
+public class PlayerModel
 {
     private string _playerName;
     private int _playerCurrentLevel;

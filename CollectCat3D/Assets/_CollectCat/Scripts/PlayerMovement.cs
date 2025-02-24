@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rb;
     private bool _isGrounded;
     private InputManager _inputManager;
-    private PlayerStats _playerStats;
+    private PlayerModel _playerStats;
     [SerializeField]
     private float _jumpForce = 8f; // Lực nhảy
     [SerializeField]
@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        _playerStats = new PlayerStats();
+        _playerStats = new PlayerModel();
         if (_playerStats == null)
         {
             Debug.LogError("PlayerStats is missing!");

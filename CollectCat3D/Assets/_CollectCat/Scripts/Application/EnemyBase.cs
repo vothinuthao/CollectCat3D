@@ -1,8 +1,23 @@
+using System;
 using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    protected EnemyStats stats;
+
+    protected virtual void Awake()
+    {
+        stats = new EnemyStats("Dino", 2, 3f);
+    }
+
     public abstract void Attack();
-    
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag=="Player")
+        {
+            Debug.Log(stats.enemyName);
+        }
+    }
+
 }

@@ -1,16 +1,21 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private ItemModel _itemModel;
+    [SerializeField]
+    private List<ItemSO> _items;
+
+    public void Initialize(ItemBase itemBase)
     {
-        
+        _itemModel = new ItemModel(itemBase);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CollectItem(int amount)
     {
-        
+        _itemModel.CollectItem(amount);
+        Debug.Log($"{_itemModel.GetItemName()} collected! Current Quantity: {_itemModel.GetCollectableQuantity()}");
     }
+    
 }

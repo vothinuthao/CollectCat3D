@@ -7,8 +7,9 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Awake()
     {
-        stats = new EnemyStats("Dino", 2, 3f);
+       
     }
+    
 
     public abstract void Attack();
 

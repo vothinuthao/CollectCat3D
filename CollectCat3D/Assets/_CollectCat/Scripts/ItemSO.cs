@@ -1,5 +1,5 @@
 using UnityEngine;
-
+[CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item")]
 public class ItemSO : ScriptableObject
 {
     public string itemName;
@@ -8,6 +8,5 @@ public class ItemSO : ScriptableObject
     public float speed;
     public Sprite iconItem;
     public int itemQuantity;
-
-
+  
 }

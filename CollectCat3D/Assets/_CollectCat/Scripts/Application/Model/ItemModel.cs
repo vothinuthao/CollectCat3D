@@ -3,6 +3,7 @@ using UnityEngine;
 public class ItemModel 
 {
     private ItemBase _itemBase;
+    
 
     public ItemModel(ItemBase itemBase)
     {
@@ -11,11 +12,13 @@ public class ItemModel
 
     public int GetCollectableQuantity()=> _itemBase.collectableQuantity;
     public string GetItemName() => _itemBase.itemName;
+    public int GetItemLayer() => _itemBase.itemData.item.layer;
 
     public void CollectItem(int amount)
     {
         _itemBase.Collect(amount);
         
     }
+    
     
 }

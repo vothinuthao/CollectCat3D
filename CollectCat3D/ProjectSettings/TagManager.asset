@@ -15,8 +15,8 @@ TagManager:
   - Water
   - Player
   - Enemy
-  - 
-  - 
+  - SpawnItem
+  - CollectableItem
   - 
   - 
   - 

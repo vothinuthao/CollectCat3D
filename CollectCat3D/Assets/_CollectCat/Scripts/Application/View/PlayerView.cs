@@ -17,13 +17,13 @@ public class PlayerView : MonoBehaviour
     private TextMeshProUGUI _showNameText;
     [SerializeField]
     private TMP_InputField _getPlayerNameText;
-    private PlayerModel _playerStats;
+    private PlayerModel _playerModel;
 
     private string _playerNameText;
 
     private void Start()
     {
-        if (_playerStats == null)
+        if (_playerModel == null)
         {
             Debug.Log("PlayerStats is missing!");
         }
@@ -31,7 +31,7 @@ public class PlayerView : MonoBehaviour
         //_playerStats.LevelChanged += UpdateLevelText;
         
         UpdatePlayerNameText();
-        _playerStats = gameObject.GetComponent<PlayerModel>();;
+        _playerModel = gameObject.GetComponent<PlayerModel>();;
     }
 
     // private void UpdateLevelText()
@@ -46,7 +46,7 @@ public class PlayerView : MonoBehaviour
     {
         if (_playerNameText != null)
         {
-            _playerNameText = _playerStats.GetPlayerName();
+            _playerNameText = _playerModel.GetPlayerName();
         }
     }
 

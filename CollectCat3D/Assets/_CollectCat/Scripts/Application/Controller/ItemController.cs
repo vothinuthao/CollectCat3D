@@ -66,7 +66,7 @@ public class ItemController : MonoBehaviour
         {
             float randomX = Random.Range(_groundBounds.min.x, _groundBounds.max.x);
             float randomZ = Random.Range(_groundBounds.min.z, _groundBounds.max.z);
-            float randomY = Random.Range(3f, 6f);
+            float randomY = Random.Range(3f, 4f);
             
             Vector3 randomPosition = new Vector3(randomX, randomY, randomZ);
             if (!Physics.CheckSphere(randomPosition, minSpacing))

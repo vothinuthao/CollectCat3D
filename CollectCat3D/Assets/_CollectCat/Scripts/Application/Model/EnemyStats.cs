@@ -6,6 +6,7 @@ public class EnemyStats
     public string enemyName;
     public int attackPower;
     public float moveSpeed;
+    public Animator _animator;
 
 
     public EnemyStats(string name, int attack, float speed)
@@ -13,5 +14,10 @@ public class EnemyStats
         enemyName = name;
         attackPower = attack;
         moveSpeed = speed;
+    }
+    public EnemyStats() {
+        enemyName = "Default Enemy";
+        attackPower = 10;
+        moveSpeed = 3.5f;
     }
 }

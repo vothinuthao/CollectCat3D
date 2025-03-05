@@ -1,9 +1,22 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //hàm nhập tên = Cần gì? lấy trực tiếp hay kêết nối với View
-    //hàm lấy level => cần levelManager
-    //hàm tăng speed => Cần levelManager hay GameManager
-    //hàm giảm máu => liên kết vs Enemy hay GameManager
+    private PlayerModel _playerModel;
+
+    private void Start()
+    {
+        _playerModel = new PlayerModel();
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("CollectableItem"))
+        {
+            Debug.Log("Collected Item");
+        }
+       
+    }
 }
+

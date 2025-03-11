@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: CollectableItem1
   m_EditorClassIdentifier: 
   itemName: Item1
-  itemID: 1
+  itemID: Collectable
   item: {fileID: 4728253983229315126, guid: b26fd64f1db082d4d90b3235a5651add, type: 3}
   speed: 1
-  iconItem: {fileID: 0}
-  itemQuantity: 5
+  iconItem: {fileID: 21300000, guid: ee65a39cc0cae234995307450462f111, type: 3}

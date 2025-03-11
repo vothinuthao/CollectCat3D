@@ -1,10 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CollectableItem : ItemBase
 {
-    public CollectableItem(ItemSO data, int startQuantity) : base(data, startQuantity)
+    [SerializeField] private List<ItemSO> _items;
+    public CollectableItem(ItemSO data) : base(data)
     {
-        
+       
     }
 
     public override void UseItem()

@@ -1,30 +1,25 @@
+using System.Collections.Generic;
+using _CollectCat.Scripts.Application.Define;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class ItemBase
+public abstract class ItemBase: MonoBehaviour
 {
-    public int collectableQuantity;
+    public int ID;
     public string itemName;
+    public ItemType itemType;
     public float speed;
     public ItemSO itemData;
 
-    public ItemBase(ItemSO data, int collectableQuantity = 0)
+    protected ItemBase(ItemSO data)
     {
-        this.collectableQuantity = collectableQuantity;
         itemName = data.name;
         speed = data.speed;
         this.itemData = data;
     }
 
-    public virtual void Collect(int quantity)
-    {
-        collectableQuantity += quantity;
-        if (collectableQuantity > itemData.itemQuantity)
-        {
-            collectableQuantity = itemData.itemQuantity;
-        }
-
-    }
+    public string GetItemName() => itemName;
+    public int GetItemLayer() => itemData.item.layer;
 
     public abstract void UseItem();
 

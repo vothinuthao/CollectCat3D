@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5833985272e37884d8d4d568b473546a, type: 3}
   m_Name: CollectableItem3
   m_EditorClassIdentifier: 
-  itemName: 
-  itemID: 0
+  itemName: Item3
+  itemID: Collectable
   item: {fileID: 5875544400166791266, guid: 1800cca52f2b0ed459ca6f0ad0a78a55, type: 3}
-  speed: 0
-  iconItem: {fileID: 0}
-  itemQuantity: 0
+  speed: 1
+  iconItem: {fileID: 21300000, guid: 0c71e22c06e48d842843c35bbcb8a724, type: 3}

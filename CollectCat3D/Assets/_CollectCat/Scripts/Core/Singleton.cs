@@ -12,7 +12,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     // Lock object để đảm bảo thread-safe
     private static readonly object _lock = new object();
     
-    [Obsolete("Obsolete")]
+   
     public static T Instance
     {
         get
@@ -31,7 +31,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 if (_instance == null)
                 {
                     // Tìm tất cả các instance trong scene
-                    _instance = (T)FindObjectOfType(typeof(T));
+                    _instance = (T)FindFirstObjectByType(typeof(T));
                     
                     // Nếu có nhiều hơn 1 instance trong scene
                     var allInstances = FindObjectsOfType(typeof(T));

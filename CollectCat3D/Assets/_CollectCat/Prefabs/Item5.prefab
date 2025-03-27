@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8624900783153903168}
   - component: {fileID: 3698614616396088889}
   - component: {fileID: 8655084936065057160}
+  - component: {fileID: 5577614054725448348}
   m_Layer: 11
   m_Name: Item5
   m_TagString: CollectableItem
@@ -109,3 +110,15 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 9123730727575708025, guid: 1ab6f67df4c24c39935bd3b44b2f5e4c, type: 3}
+--- !u!114 &5577614054725448348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7879694565595652479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa60c376dd38994c9323c080e73d01e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

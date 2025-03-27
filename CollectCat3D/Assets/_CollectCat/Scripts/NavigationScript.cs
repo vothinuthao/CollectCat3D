@@ -4,22 +4,23 @@ using UnityEngine.AI;
 public class NavigationScript : MonoBehaviour
 {
     public Transform player;
-    private NavMeshAgent _agent;
+    public NavMeshAgent _agent;
    
-    private EnemyStats _stats;
-    void Start()
+    public EnemyBase _enemyBase;
+    public void Init(EnemyBase data)
     {
-        _stats = new EnemyStats();
-        _agent = GetComponent<NavMeshAgent>();
-        _stats._animator = GetComponent<Animator>();
+        _enemyBase = data;
+        player = GameManager.Instance.InventoryController.PlayerController.transform;
+        _enemyBase._animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!_agent || !player) return; 
         _agent.destination = player.position;
         bool isMoving = _agent.velocity.magnitude > 0.1f;
-        _stats._animator.SetBool("isMoving", isMoving);
+        _enemyBase._animator.SetBool("isMoving", isMoving);
     }
     
 }   

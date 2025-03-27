@@ -58,7 +58,7 @@ public class ItemSpawner : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            itemController.SetupSpawn(bounds, maxItemCount, minSpacing, "Collectable");
+           // itemController.SetupSpawn(bounds, maxItemCount, minSpacing,);
             Debug.Log($"Đã bắt đầu spawn {maxItemCount} items với khoảng cách tối thiểu {minSpacing}");
         }
     }

@@ -1,25 +1,38 @@
+using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 
 
 public class EnemyController : MonoBehaviour
 {
-    private EnemyStats _stats;
+    [SerializeField]
+    private NavigationScript navMeshScript;
+    
+    private EnemyBase _enemyBase;
+    
 
-    void Start()
+    public void SetData(EnemySO data)
     {
-        _stats = new EnemyStats();
-        _stats._animator=GetComponent<Animator>();
+        var enemy = new EnemyBase()
+        {
+            enemyName = data.enemyName,
+            moveSpeed = data.speed,
+            attackPower = data.attack,
+            _enemyObj = data.enemyObject,
+        };
+        _enemyBase = enemy;
+        navMeshScript.Init(_enemyBase);
     }
 
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            _stats._animator.SetTrigger("Attack");
+            _enemyBase._animator.SetTrigger("Attack");
             
         }
     }
-
+    
+    
     
 }

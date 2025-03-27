@@ -1,26 +1,35 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using _CollectCat.Scripts.Application.Define;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class ItemBase: MonoBehaviour
+public abstract class ItemBase 
 {
-    public int ID;
-    public string itemName;
+   
+    public string ItemName { get; private set; }
     public ItemType itemType;
     public float speed;
-    public ItemSO itemData;
+    protected ItemSO itemData; // Đổi từ private -> protected
 
     protected ItemBase(ItemSO data)
     {
-        itemName = data.name;
+        if (data == null)
+        {
+            Debug.LogError("ItemBase constructor nhận vào một ItemSO null!");
+            return;
+        }
+
+        ItemName = data.name;
         speed = data.speed;
-        this.itemData = data;
+        itemData = data;
     }
 
-    public string GetItemName() => itemName;
-    public int GetItemLayer() => itemData.item.layer;
+    public string GetItemName() => ItemName;
+    
+    public int GetItemLayer() => itemData != null ? itemData.item.layer : -1;
+
+    public ItemSO GetItemData() => itemData;
 
     public abstract void UseItem();
-
 }

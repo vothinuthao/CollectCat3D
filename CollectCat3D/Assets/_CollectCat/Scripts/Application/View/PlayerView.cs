@@ -21,6 +21,12 @@ public class PlayerView : MonoBehaviour
 
     private string _playerNameText;
 
+    public string PlayerNameText
+    {
+        get { return _playerNameText; }
+    }
+    
+
     private void Start()
     {
         if (_playerModel == null)
@@ -63,6 +69,8 @@ public class PlayerView : MonoBehaviour
         _playerNameText = _getPlayerNameText.text;
         Debug.Log(_playerNameText);
         HideGetNameButton();
+        GameManager.Instance.StartLevel();
+            
     }
 
     public void ShowGetNameButton()

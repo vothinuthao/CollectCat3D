@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed5980610fecd054fb78937a24151603, type: 3}
+  m_Name: Enemy2
+  m_EditorClassIdentifier: 
+  enemyName: Kentro
+  attack: 0
+  speed: 1
+  enemyObject: {fileID: 2115354778616720159, guid: 970a53aeb1d33944db6515278e50d2d1, type: 3}

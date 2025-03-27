@@ -1,17 +1,28 @@
 using System;
 using UnityEngine;
 
-public abstract class EnemyBase : MonoBehaviour
+public class EnemyBase
 {
-    protected EnemyStats stats;
-
-    protected virtual void Awake()
+    public string enemyName;
+    public int attackPower;
+    public float moveSpeed;
+    public Animator _animator;
+    public GameObject _enemyObj;
+  
+    private EnemySO _enemyData;
+    protected void SetData()
     {
        
     }
     
+    public void Initialize(EnemySO data)
+    {
+        enemyName = data.enemyName;
+        attackPower = data.attack;
+        moveSpeed = data.speed;
+        _enemyObj = data.enemyObject;
 
-    public abstract void Attack();
+    }
 
     public void OnCollisionEnter(Collision collision)
     {
@@ -21,7 +32,7 @@ public abstract class EnemyBase : MonoBehaviour
         }
         if (collision.gameObject.tag=="Player")
         {
-            Debug.Log(stats.enemyName);
+            Debug.Log(enemyName);
         }
     }
     

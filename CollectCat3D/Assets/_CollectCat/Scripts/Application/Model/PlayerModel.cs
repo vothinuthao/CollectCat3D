@@ -9,7 +9,7 @@ public class PlayerModel
     private int _currentHealth;
     private const int _maxHealth = 100;
     private const int _minHealth = 0;
-    private const float _maxSpeed = 12f;
+    private const float _maxSpeed = 20f;
     private float _currentSpeed;
     public event Action HealthChanged;
     public event Action LevelChanged;
@@ -50,7 +50,7 @@ public class PlayerModel
 
     public void ResetSpeed()
     {
-        _currentSpeed = 5f;
+        _currentSpeed = 12f;
     }
 
     public void SetPlayerName(string playerName)

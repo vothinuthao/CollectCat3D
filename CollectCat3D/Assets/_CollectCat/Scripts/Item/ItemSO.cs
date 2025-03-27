@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item")]
 public class ItemSO : ScriptableObject
 {
-    public string itemID;
+    public int itemID;
     public ItemType itemType;
     public string itemName;
     public GameObject item;

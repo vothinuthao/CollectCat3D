@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _CollectCat.Scripts.Application.Define;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.AI;
@@ -12,7 +13,7 @@ public class ItemController : MonoBehaviour
     
     private List<ItemSO> _filteredItems;
     private Bounds _groundBounds;
-    private int _maxSpawn;
+    public int _maxSpawn;
     private int _currentSpawn = 0;
     private List<GameObject> _spawnedItems = new List<GameObject>();
     private List<ItemBase> _ListItemBase = new List<ItemBase>();
@@ -37,7 +38,7 @@ public class ItemController : MonoBehaviour
         
         if (_itemView == null)
         {
-            _itemView = FindObjectOfType<ItemView>();
+            _itemView = FindFirstObjectByType<ItemView>();
             if (_itemView == null)
             {
                 Debug.LogError("ItemView is missing! Make sure it is attached.");
@@ -45,7 +46,7 @@ public class ItemController : MonoBehaviour
         }
     }
 
-    public void SetupSpawn(Bounds newBounds, int newMaxSpawn, float newMinSpacing, string itemID)
+    public void SetupCollectableSpawn(Bounds newBounds, int newMaxSpawn, float newMinSpacing)
     {
         _groundBounds = newBounds;
         _maxSpawn = newMaxSpawn;
@@ -56,12 +57,12 @@ public class ItemController : MonoBehaviour
         ClearSpawnedItems();
         
         // Lọc danh sách item theo ID
-        _filteredItems = _items.FindAll(item => item.itemID == itemID);
+        _filteredItems = _items.FindAll(item => item.itemType == ItemType.Collectable);
         Debug.Log("Filtered Items Count: " + _filteredItems.Count);
         
         if (_filteredItems == null || _filteredItems.Count == 0)
         {
-            Debug.LogWarning("Không có item nào phù hợp với itemID: " + itemID);
+            Debug.LogWarning("Không có item nào phù hợp với itemID: " + ItemType.Collectable);
             return;
         }
         
@@ -120,6 +121,10 @@ public class ItemController : MonoBehaviour
         
         // Spawn item
         GameObject spawnedItem = Instantiate(itemSO.item, spawnPos, Quaternion.identity);
+       ItemComponent itemComponent = spawnedItem.GetComponent<ItemComponent>();
+       CollectableItem itemData  = new CollectableItem(itemSO);
+       itemComponent.SetData(itemData);
+        
         
         // Lưu item đã spawn để quản lý
         _spawnedItems.Add(spawnedItem);
@@ -185,6 +190,7 @@ public class ItemController : MonoBehaviour
         {
             if (item != null)
             {
+                DOTween.Kill(item.transform);
                 Destroy(item);
             }
         }
@@ -197,6 +203,7 @@ public class ItemController : MonoBehaviour
     {
         // Đảm bảo dọn dẹp tất cả các vật thể khi controller bị hủy
         ClearSpawnedItems();
+        DOTween.KillAll();
     }
     
     public void ApplySpawnEffect(GameObject item, Vector3 targetPos)

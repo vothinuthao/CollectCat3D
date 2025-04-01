@@ -16,21 +16,21 @@ MonoBehaviour:
   - levelName: Level 1
     levelNumber: 1
     levelDescription: Forest
-    maxHealth: 5
-    maxSpawn: 2
+    maxHealth: 10
+    maxEnemy: 2
     minSpawnSpacing: 0.2
-    requiredItems: 2
+    requiredItems: 1
   - levelName: Level 2
     levelNumber: 2
     levelDescription: Desert
-    maxHealth: 6
-    maxSpawn: 2
-    minSpawnSpacing: 0.2
-    requiredItems: 2
+    maxHealth: 8
+    maxEnemy: 4
+    minSpawnSpacing: 0.1
+    requiredItems: 1
   - levelName: Level 3
     levelNumber: 3
     levelDescription: Village
     maxHealth: 5
-    maxSpawn: 2
-    minSpawnSpacing: 0.2
-    requiredItems: 2
+    maxEnemy: 6
+    minSpawnSpacing: 0.15
+    requiredItems: 1

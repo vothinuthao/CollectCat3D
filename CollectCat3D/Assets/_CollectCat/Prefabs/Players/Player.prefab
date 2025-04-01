@@ -212,6 +212,7 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: b1e72383ed753364ca7af4201b6fdd13, type: 2}
   itemComponent: {fileID: 0}
   quantity: 1
+  _playerPrefab: {fileID: 7304883782543420222}
 --- !u!1001 &5726471150395986560
 PrefabInstance:
   m_ObjectHideFlags: 0

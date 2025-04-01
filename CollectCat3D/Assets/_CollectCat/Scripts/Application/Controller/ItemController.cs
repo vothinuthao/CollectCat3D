@@ -115,8 +115,15 @@ public class ItemController : MonoBehaviour
         Vector3 spawnPos = GetRandomSpawnPosition();
         if (spawnPos == Vector3.zero)
         {
-            Debug.LogWarning("Không thể tìm vị trí spawn hợp lệ sau nhiều lần thử.");
-            return false;
+            float reducedSpacing = minSpacing * 0.8f;
+            Debug.Log($"Trying with reduced spacing: {reducedSpacing}");
+            spawnPos = GetRandomSpawnPositionWithCustomSpacing(reducedSpacing);
+    
+            if (spawnPos == Vector3.zero)
+            {
+                Debug.LogWarning("Không thể tìm vị trí spawn hợp lệ sau nhiều lần thử.");
+                return false;
+            }
         }
         
         // Spawn item
@@ -145,6 +152,8 @@ public class ItemController : MonoBehaviour
     private Vector3 GetRandomSpawnPosition()
     {
         const int MAX_ATTEMPTS = 20; // Tăng số lần thử
+        int obstacleLayerMask = ~(1 << LayerMask.NameToLayer("Ground"));
+
         for (int attempt = 0; attempt < MAX_ATTEMPTS; attempt++)
         {
             // Sinh vị trí ngẫu nhiên trong bounds
@@ -163,6 +172,32 @@ public class ItemController : MonoBehaviour
         return Vector3.zero; // Không tìm thấy vị trí hợp lệ
     }
 
+    private Vector3 GetRandomSpawnPositionWithCustomSpacing(float spacing)
+    {
+        const int MAX_ATTEMPTS = 30;
+        for (int attempt = 0; attempt < MAX_ATTEMPTS; attempt++)
+        {
+            float randomX = Random.Range(_groundBounds.min.x, _groundBounds.max.x);
+            float randomZ = Random.Range(_groundBounds.min.z, _groundBounds.max.z);
+            // Sử dụng độ cao của groundBounds thay vì giá trị cố định
+            float randomY = _groundBounds.center.y + 1f;
+            Vector3 randomPosition = new Vector3(randomX, randomY, randomZ);
+        
+            if (!Physics.CheckSphere(randomPosition, spacing))
+            {
+                return randomPosition;
+            }
+        }
+    
+        // Nếu thất bại, thử lại với khoảng cách = 0
+        Vector3 lastResortPosition = new Vector3(
+            Random.Range(_groundBounds.min.x, _groundBounds.max.x),
+            _groundBounds.center.y + 1f,
+            Random.Range(_groundBounds.min.z, _groundBounds.max.z)
+        );
+    
+        return lastResortPosition;
+    }
 
     
     private void UpdateSpawnCount()

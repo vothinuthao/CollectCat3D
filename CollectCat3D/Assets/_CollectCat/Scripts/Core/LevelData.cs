@@ -11,7 +11,7 @@ public class LevelConfig
     public int levelNumber;
     public string levelDescription;
     public int maxHealth;
-    public int maxSpawn;
+    public int maxEnemy;
     public float minSpawnSpacing;
     public int requiredItems;
     

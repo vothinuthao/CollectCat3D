@@ -6,19 +6,11 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour
 {
     private int collectableQuantity;
-    [SerializeField]
-    private PlayerController playerController;
     private Dictionary<string, int> _inventory = new Dictionary<string, int>();
-    public PlayerController PlayerController => playerController;
-
+    
     public int GetCollectableQuantity() => collectableQuantity;
     public int TotalCollectableQuantity() => _inventory.Values.Sum();
-
-    public void Initialize()
-    {
-        playerController = GetComponent<PlayerController>();
-    }
-
+    
     public void AddItemToInventory(ItemBase itemBase, int quantity)
     {
         string itemName = itemBase.GetItemName();
@@ -30,9 +22,11 @@ public class InventoryController : MonoBehaviour
         {
             _inventory[itemName] = quantity;
         }
-        collectableQuantity = _inventory[itemName]; 
 
-       
+        collectableQuantity = TotalCollectableQuantity();
+        int total = TotalCollectableQuantity();
+        Debug.Log($"Item đã thu thập: {itemName}, Số lượng hiện tại: {collectableQuantity}, Tổng số item: {total}");
+        
         if (GameManager.Instance != null)
         {
             GameManager.Instance.OnLevelComplete();
@@ -46,14 +40,15 @@ public class InventoryController : MonoBehaviour
 
     private void OnEnable()
     {
-            PlayerController.OnCollect += AddItemToInventory;
+        PlayerController.OnCollect += AddItemToInventory;
+        Debug.Log("InventoryController: Đăng ký event OnCollect");
     }
 
     private void OnDisable()
     {
-            PlayerController.OnCollect -= AddItemToInventory;
+        PlayerController.OnCollect -= AddItemToInventory;
+        Debug.Log("InventoryController: Hủy đăng ký event OnCollect");
     }
-
     public void ResetData()
     {
         collectableQuantity = 0;

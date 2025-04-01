@@ -7,7 +7,7 @@ public class PlayerModel
     private int _playerCurrentLevel;
     private int _playerPass;
     private int _currentHealth;
-    private const int _maxHealth = 100;
+    //private int  _maxHealth;
     private const int _minHealth = 0;
     private const float _maxSpeed = 20f;
     private float _currentSpeed;
@@ -16,25 +16,25 @@ public class PlayerModel
     
     public int CurrentHealth {get => _currentHealth; set => _currentHealth = value; }
     public int MinHealth => _minHealth;
-    public int MaxHealth => _maxHealth;
+    //public int MaxHealth => _maxHealth;
     public float CurrentSpeed {get => _currentSpeed;  private set => _currentSpeed = value; }
     public int PlayerCurrentLevel { get => _playerCurrentLevel; set => _playerCurrentLevel = value; }
 
- public void IncrementHealth(int amount)
+ public void IncrementHealth(int amount, int _maxHealth)
     {
         _currentHealth += amount;
         _currentHealth = Mathf.Clamp(_currentHealth, _minHealth, _maxHealth);
         UpdateHealth();
     }
  
-    public void DecrementHealth(int amount)
+    public void DecrementHealth(int amount, int _maxHealth)
     {
         _currentHealth -= amount;
         _currentHealth = Mathf.Clamp(_currentHealth, _minHealth, _maxHealth);
         UpdateHealth();
     }
 
-    public void RestoreHealth()
+    public void RestoreHealth(int _maxHealth)
     {
         _currentHealth = _maxHealth;
         UpdateHealth();

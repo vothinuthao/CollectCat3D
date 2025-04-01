@@ -12,19 +12,19 @@ public class EndGameUI : MonoBehaviour
     {
         gameOverPanel.SetActive(false);
         gameWinPanel.SetActive(false);
-        if (playAgainButton == null)
+        if (playAgainButton != null)
         {
             playAgainButton.onClick.AddListener(PlayAgainBtn);
         }
 
-        if (restartButton == null)
+        if (restartButton != null)
         {
             restartButton.onClick.AddListener(RestartBtn);
         }
 
-        if (menuButton == null)
+        if (menuButton != null)
         {
-            menuButton.onClick.AddListener(RestartBtn);
+            menuButton.onClick.AddListener(MenuBtn);
         }
         
     }

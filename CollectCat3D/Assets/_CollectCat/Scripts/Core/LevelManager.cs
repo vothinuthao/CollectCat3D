@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     public MapManager mapManager;
     private MapData mapData;
     private Bounds _mapBounds;
-   
+   public int CurrentLevel => currentLevel;
 
    
     public LevelConfig CurrentLevelConfig
@@ -72,14 +72,20 @@ public class LevelManager : MonoBehaviour
         mapManager.LoadMap(currentLevelConfig.levelNumber);
         GameManager.Instance.InitializeGround();
         GameManager.Instance.SpawnItem(levelData);
-
+        GameManager.Instance.InitializeEnemies();
+        GameManager.Instance.InitializePlayer();
+        GameManager.Instance.SetHealth(currentLevelConfig.maxHealth);
+        if (GameManager.Instance.PlayerView != null)
+        {
+            GameManager.Instance.PlayerView.RefreshUI();
+        }
 
 
     }
 
     public void LoadNextLevel()
     {
-        if (currentLevel + 1 < levelData.listLevelConfig.Count)
+        if (currentLevel + 1 <= levelData.listLevelConfig.Count)
         {
             LoadLevel(currentLevel + 1);
         }
@@ -96,7 +102,18 @@ public class LevelManager : MonoBehaviour
         GameManager.Instance.ResetData();
         Time.timeScale = 1f;
         mapManager.LoadMap(currentLevelConfig.levelNumber);
+        GameManager.Instance.InitializeGround();
         GameManager.Instance.SpawnItem(levelData);
+        GameManager.Instance.SetHealth(currentLevelConfig.maxHealth);
+        GameManager.Instance.InitializeEnemies();
+        GameManager.Instance.InitializePlayer();
+        GameManager.Instance.SetHealth(currentLevelConfig.maxHealth);
+    
+        // Cập nhật UI máu
+        if (GameManager.Instance.PlayerView != null)
+        {
+            GameManager.Instance.PlayerView.RefreshUI();
+        }
       
     }
    

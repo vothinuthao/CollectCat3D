@@ -16,8 +16,13 @@ public class GameManager : Singleton<GameManager>
     //public UnityEvent Action LevelComplete;
     private GameState _currentGameState;
     public GameState CurrentGameState => _currentGameState;
-    // [SerializeField]
-    // private PlayerController _playerController;
+    public PlayerController PlayerController
+    {
+        get => _playerController;
+    }
+
+    [SerializeField]
+    private PlayerController _playerController;
     [SerializeField]
     private EnemiesManager _enemiesManager;
     [SerializeField]
@@ -51,135 +56,147 @@ public class GameManager : Singleton<GameManager>
 
 
     public InventoryController InventoryController => _inventoryController;
-   
-    
-   void Start()
-{ 
-    // if (_playerController == null)
-    // {
-    //     _playerController = GetComponent<PlayerController>();
-    //     if (_playerController == null)
-    //     {
-    //         Debug.LogError("_playerController is missing! Make sure it is attached.");
-    //     }
-    // }
+    public LevelManager LevelManager => _levelManager;
+    public PlayerView PlayerView => _playerView;
 
-    // if (_inventoryController == null)
-    // {
-    //     _enemyController = GetComponent<EnemyController>();
-    //     if (_enemyController == null)
-    //     {
-    //         Debug.LogError("_enemyController is missing! Make sure it is attached.");
-    //     }
-    // }
-    //
-    //
-    // if (_itemController == null)
-    // {
-    //     _itemController = GetComponent<ItemController>();
-    //     if (_itemController == null)
-    //     {
-    //         Debug.LogError("_itemController is missing! Make sure it is attached.");
-    //     }
-    // }
 
-    if (_levelManager == null)
+    void Start()
     {
-        _levelManager = GetComponent<LevelManager>();
+        // if (_playerController == null)
+        // {
+        //     _playerController = GetComponent<PlayerController>();
+        //     if (_playerController == null)
+        //     {
+        //         Debug.LogError("_playerController is missing! Make sure it is attached.");
+        //     }
+        // }
+
+        // if (_inventoryController == null)
+        // {
+        //     _enemyController = GetComponent<EnemyController>();
+        //     if (_enemyController == null)
+        //     {
+        //         Debug.LogError("_enemyController is missing! Make sure it is attached.");
+        //     }
+        // }
+        //
+        //
+        // if (_itemController == null)
+        // {
+        //     _itemController = GetComponent<ItemController>();
+        //     if (_itemController == null)
+        //     {
+        //         Debug.LogError("_itemController is missing! Make sure it is attached.");
+        //     }
+        // }
+
         if (_levelManager == null)
         {
-            Debug.LogError("_levelManager is missing! Make sure it is attached.");
+            _levelManager = GetComponent<LevelManager>();
+            if (_levelManager == null)
+            {
+                Debug.LogError("_levelManager is missing! Make sure it is attached.");
+            }
         }
-    }
 
-    if (_inventoryController == null)
-    {
-        _inventoryController = GetComponent<InventoryController>();
         if (_inventoryController == null)
         {
-            Debug.LogError("_inventoryController is missing! Make sure it is attached.");
+            _inventoryController = GetComponent<InventoryController>();
+            if (_inventoryController == null)
+            {
+                Debug.LogError("_inventoryController is missing! Make sure it is attached.");
+            }
         }
-    }
 
-    if (_mapManager == null)
-    {
-        _mapManager = GetComponent<MapManager>();
         if (_mapManager == null)
         {
-            Debug.LogError("_mapManager is missing! Make sure it is attached.");
+            _mapManager = GetComponent<MapManager>();
+            if (_mapManager == null)
+            {
+                Debug.LogError("_mapManager is missing! Make sure it is attached.");
+            }
         }
-    }
 
-    if (_playerView == null)
-    {
-        _playerView = GetComponent<PlayerView>();
         if (_playerView == null)
         {
-            Debug.LogError("_playerView is missing! Make sure it is attached.");
+            _playerView = GetComponent<PlayerView>();
+            if (_playerView == null)
+            {
+                Debug.LogError("_playerView is missing! Make sure it is attached.");
+            }
         }
-    }
 
-    if (_itemView == null)
-    {
-        _itemView = GetComponent<ItemView>();
         if (_itemView == null)
         {
-            Debug.LogError("_itemView is missing! Make sure it is attached.");
+            _itemView = GetComponent<ItemView>();
+            if (_itemView == null)
+            {
+                Debug.LogError("_itemView is missing! Make sure it is attached.");
+            }
         }
-    }
-    
 
-    // _enemyView = GetComponent<EnemyView>();
-    // if (_enemyView == null)
-    // {
-    //     Debug.LogError("_enemyView is missing! Make sure it is attached.");
-    // }
 
-    if (_mainMenuUI == null)
-    {
-        _mainMenuUI = GetComponent<MainMenuUI>();
+        // _enemyView = GetComponent<EnemyView>();
+        // if (_enemyView == null)
+        // {
+        //     Debug.LogError("_enemyView is missing! Make sure it is attached.");
+        // }
+
         if (_mainMenuUI == null)
         {
-            Debug.LogError("_mainMenuUI is missing! Make sure it is attached.");
+            _mainMenuUI = GetComponent<MainMenuUI>();
+            if (_mainMenuUI == null)
+            {
+                Debug.LogError("_mainMenuUI is missing! Make sure it is attached.");
+            }
         }
-    }
 
-    if (_levelCompleteUI == null)
-    {
-        _levelCompleteUI = GetComponent<LevelCompleteUI>();
         if (_levelCompleteUI == null)
         {
-            Debug.LogError("_levelCompleteUI is missing! Make sure it is attached.");
+            _levelCompleteUI = GetComponent<LevelCompleteUI>();
+            if (_levelCompleteUI == null)
+            {
+                Debug.LogError("_levelCompleteUI is missing! Make sure it is attached.");
+            }
         }
-    }
 
 
-    if (_endGameUI == null)
-    {
-        _endGameUI = GetComponent<EndGameUI>();
         if (_endGameUI == null)
         {
-            Debug.LogError("_endGameUI is missing! Make sure it is attached.");
+            _endGameUI = GetComponent<EndGameUI>();
+            if (_endGameUI == null)
+            {
+                Debug.LogError("_endGameUI is missing! Make sure it is attached.");
+            }
         }
-    }
 
-    
-    // _itemBase = GetComponent<ItemBase>();
-    // if (_itemBase == null)
+
+        // _itemBase = GetComponent<ItemBase>();
+        // if (_itemBase == null)
+        // {
+        //     Debug.LogError("_itemBase is missing! Make sure it is attached.");
+        // }
+
+
+        if (_itemController != null)
+        {
+            _itemController.Initialize();
+        }
+
+        if (_playerController != null)
+        {
+            _playerController.Init();
+        }
+
+        if (_playerView != null)
+        {
+            _playerView.HideAllHearts();
+        }
+
+    // if (_inventoryController != null && _itemData != null)
     // {
-    //     Debug.LogError("_itemBase is missing! Make sure it is attached.");
+    //     _inventoryController.Initialize();
     // }
-
-    
-    if (_itemController != null)
-    {
-        _itemController.Initialize();
-    }
-
-    if (_inventoryController != null && _itemData != null)
-    {
-        _inventoryController.Initialize();
-    }
 
     if (_levelManager != null && _itemController != null && _inventoryController != null)
     {
@@ -199,7 +216,7 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        
+        _playerController.SetPosition();
     }
     public void SetGameState(GameState gameState)
     {
@@ -246,7 +263,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (_currentGameState == GameState.Paused || _currentGameState == GameState.GameOver || _currentGameState == GameState.LevelComplete)
         {
-            _enemiesManager.ClearEnemies();
+            //_enemiesManager.ClearEnemies();
           _levelManager.ReloadLevel();
           InitializeEnemies();
           SetGameState(GameState.Gameplay);
@@ -270,11 +287,15 @@ public class GameManager : Singleton<GameManager>
 
     public void OnLevelComplete()
     {
-        if (_currentGameState == GameState.Gameplay && _inventoryController.TotalCollectableQuantity() == _levelManager.CurrentLevelConfig.requiredItems)
+        if (_currentGameState == GameState.Gameplay && _inventoryController.TotalCollectableQuantity() == _levelManager.CurrentLevelConfig.requiredItems&& _levelManager.CurrentLevel + 1 <= _levelManager.levelData.listLevelConfig.Count)
         {
             SetGameState(GameState.LevelComplete);
             Time.timeScale = 0f;
             _levelCompleteUI.ShowLevelCompletePanel();
+        }
+        if (_currentGameState == GameState.Gameplay && _inventoryController.TotalCollectableQuantity() == _levelManager.CurrentLevelConfig.requiredItems &&_levelManager.CurrentLevel ==  _levelManager.levelData.listLevelConfig.Count)
+        {
+            _endGameUI.ShowGameWinPanel();
         }
     }
 
@@ -282,6 +303,7 @@ public class GameManager : Singleton<GameManager>
     {
         _levelManager.LoadNextLevel();
         InitializeEnemies();
+        SetGameState(GameState.Gameplay);
     }
     public void SaveGame()
     {
@@ -347,14 +369,61 @@ public class GameManager : Singleton<GameManager>
 
     public void InitializeEnemies()
     {
-        _enemiesManager.InitializeEnemyDate();
+        if (_mapBounds.size == Vector3.zero)
+        {
+            Debug.LogError("GameManager: Map bounds chưa được khởi tạo!");
+            return;
+        }
+
+        if (_enemiesManager == null)
+        {
+            Debug.LogError("GameManager: _enemiesManager is null!");
+        }
+        else
+        {
+            _enemiesManager.SetupEnemySpawn(_mapBounds,_levelManager.CurrentLevelConfig.maxEnemy, _levelManager.CurrentLevelConfig.minSpawnSpacing);
+        }
+
     }
 
-    // public void PlayerViewInit()
-    // {
-    //     _playerView.Init();
-    // }
-    
-    
+    public void InitializePlayer()
+    {
+        if (_mapBounds.size == Vector3.zero)
+        {
+            Debug.LogError("GameManager: Map bounds chưa được khởi tạo!");
+            return;
+        }
+
+        if (_playerController == null)
+        {
+            Debug.LogError("GameManager: _playerController is null!");
+        }
+        else
+        {
+            _playerController.SetUpPlayerSpawn(_mapBounds);
+        }
+    }
+
+    public void SetHealth(int health)
+    {
+        _playerController.PlayerModel.RestoreHealth(health);
+        if (_playerView != null)
+        {
+            _playerView.RefreshUI();
+        }
+    }
+
+    public void DecreaseHealth(int health)
+    {
+        PlayerController.PlayerModel.DecrementHealth(health, _levelManager.CurrentLevelConfig.maxHealth);
+        if (_playerView != null)
+        {
+            _playerView.RefreshUI();
+        }
+        if (_playerController.PlayerModel.CurrentHealth <= 0)
+        {
+            EndGame(false); // Game over khi hết máu
+        }
+    }
 
 }
